@@ -1,0 +1,83 @@
+{
+  "entities": {
+    "reflection": {
+      "title": "Reflection",
+      "description": "A private user reflection session containing conversation history, analysis lenses, and final structured summary",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the reflection session"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID of the owner"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Short, human-readable title summarizing the reflection topic"
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["understand", "reality-check", "decision", "learn", "process"],
+          "description": "Selected reflection mode"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "completed"],
+          "description": "Whether reflection is ongoing or concluded"
+        },
+        "initialPrompt": {
+          "type": "string",
+          "maxLength": 10000,
+          "description": "First message or experience entered by user"
+        },
+        "messages": {
+          "type": "array",
+          "description": "Ordered multi-turn dialogue between user and Mantavya"
+        },
+        "realityCheck": {
+          "type": "object",
+          "description": "Facts vs interpretations breakdown"
+        },
+        "widerLens": {
+          "type": "string",
+          "maxLength": 10000,
+          "description": "Observer perspective analysis"
+        },
+        "tensionLens": {
+          "type": "string",
+          "maxLength": 10000,
+          "description": "Identified conflicting priorities or goals"
+        },
+        "complexityCheck": {
+          "type": "string",
+          "maxLength": 10000,
+          "description": "Observation on strategy inflation vs execution"
+        },
+        "structuredSummary": {
+          "type": "object",
+          "description": "Concluded structured reflection with what happened, assumptions, lessons, agency, and before/now"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO timestamp of creation"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO timestamp of last update"
+        }
+      },
+      "required": ["id", "userId", "mode", "status", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/reflections/{reflectionId}": {
+      "schema": "reflection",
+      "description": "Private reflection document strictly isolated per authenticated user."
+    }
+  }
+}

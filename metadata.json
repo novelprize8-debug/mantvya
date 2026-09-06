@@ -1,0 +1,6 @@
+{
+  "name": "Mantavya",
+  "description": "Private AI-assisted reflection application helping users examine assumptions, see the bigger picture, and act with agency.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
